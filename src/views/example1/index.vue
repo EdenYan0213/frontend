@@ -19,10 +19,10 @@
               :size="size"
               :pagination="pagination"
               @page-change="handlePageChange">
-      <bk-table-column type="selection" width="60" align="center" />
-      <bk-table-column type="index" label="序列" align="center" width="60" />
-      <bk-table-column label="名称/内网IP" prop="ip" />
-      <bk-table-column label="来源" prop="source" />
+<!--      <bk-table-column type="selection" width="60" align="center" />-->
+<!--      <bk-table-column type="index" label="序列" align="center" width="60" />-->
+      <bk-table-column label="业务名称" prop="bk_biz_name" />
+      <bk-table-column label="业务ID" prop="bk_biz_id" />
       <bk-table-column label="状态" prop="status" />
       <bk-table-column label="创建时间" prop="create_time" />
       <bk-table-column label="操作" width="150">
@@ -60,13 +60,23 @@ export default {
   },
   methods: {
     init() {
-      this.getTableData();
+      // this.getTableData();
+      this.getBizData();
     },
     async getTableData() {
       try {
         const res = await this.$store.dispatch('example/getTableData', {}, { fromCache: true });
         this.tableData = res.data.list;
         this.pagination.count = res.data.list.length;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async getBizData() {
+      try {
+        const res = await this.$store.dispatch('example/getBizData', {}, { fromCache: true });
+        this.tableData = res.data.info;
+        this.pagination.count = res.data.count;
       } catch (e) {
         console.error(e);
       }

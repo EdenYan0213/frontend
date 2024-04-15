@@ -17,5 +17,9 @@ export default {
       // eslint-disable-next-line no-undef
       return http.get(`/api/table?&${queryString.stringify(params)}`, params, config);
     },
+    getBizData(context, params, config = {}) {
+      // eslint-disable-next-line no-undef
+      return http.get(`https://apps.ce.bktencent.com/stag--default--bk-scut-course/biz-list`, params, config);
+    },
   },
 };
