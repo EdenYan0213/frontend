@@ -102,6 +102,7 @@ export default {
     async searchHosts() {
       const data = { bk_biz_id: 3 };
       const hostRes = await this.$store.dispatch('example/getHostsData', data, { fromCache: true });
+      // 对可用主机做筛选
       this.hostList = hostRes.data.info.filter(host => host.bk_host_id >= 865 && host.bk_host_id <= 869);
       for (const host of this.hostList) {
         host.is_selected = false;
@@ -148,17 +149,17 @@ export default {
       this.loadingText = '正在查找文件……';
       this.isLoading = true;
       const res = await this.$store.dispatch('example/searchFile', queryData, {});
+      this.isLoading = false;
       this.fileData = [];
       let errMsg = '';
-      // 路径不存在
       for (const log of res.data) {
         if (log.message) {
+          // 目录不存在或查找失败
           errMsg += `${log.bk_host_id}: ${log.message}` + '; ';
         } else {
           this.fileData.push(JSON.parse(JSON.stringify(log)));
         }
       }
-      this.isLoading = false;
       if (errMsg !== '') {
         const config = {
           theme: 'error',
@@ -168,6 +169,34 @@ export default {
         };
         this.$bkMessage(config);
       }
+    },
+    async backupFile(hostId) {
+      this.host_id_list = [hostId];
+      if (this.backupPath === '') {
+        const config = {
+          theme: 'primary',
+          message: '请输入备份目录！',
+          offsetY: 80,
+        };
+        this.$bkMessage(config);
+        return;
+      }
+      const queryData = {
+        host_id_list: this.host_id_list,
+        search_path: this.searchPath,
+        suffix: this.suffix,
+        backup_path: this.backupPath,
+      };
+      this.loadingText = '正在备份文件……';
+      this.isLoading = true;
+      await this.$store.dispatch('example/backupFile', queryData, {});
+      this.isLoading = false;
+      const config = {
+        theme: 'success',
+        message: '文件备份成功！',
+        offsetY: 80,
+      };
+      this.$bkMessage(config);
     },
   },
 };

@@ -61,7 +61,7 @@ export default {
     // 查询备份记录
     getBackupRecord(context, params, config = {}) {
       // eslint-disable-next-line no-undef
-      return http.get('http://dev.ce.bktencent.com:8000/backup-record', params, config);
+      return http.get(`http://dev.ce.bktencent.com:8000/backup-record`, params, config);
     },
   },
 };

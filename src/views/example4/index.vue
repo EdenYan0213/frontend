@@ -12,7 +12,7 @@
       <bk-table-column label="备份人" prop="bk_file_operator" width="150" />
       <bk-table-column label="备份结果" prop="bk_job_link" width="100">
         <template slot-scope="{ row }">
-          <a :href="row.bk_job_link" target="_blank">{{ $t('record.bkJobLink') }}</a>
+          <a :href="row.bk_job_link" target="_blank">JOB结果</a>
         </template>
       </bk-table-column>
     </bk-table>
@@ -33,7 +33,15 @@ export default {
       recordData: [],
     };
   },
+  created() {
+    this.getBackupRecord();
+  },
   methods: {
+    async getBackupRecord() {
+      const res = await this.$store.dispatch('example/getBackupRecord', {}, { fromCache: true });
+      this.recordData = res.data;
+      // TODO：参照bk-table组件文档，实现分页操作
+    },
   },
 }
 ;
