@@ -55,7 +55,7 @@ export default {
     // 根据传入的主机ID和文件信息，备份符合要求的文件到指定目录
     backupFile(context, params, config = {}) {
       // eslint-disable-next-line no-undef
-      const url = `hhttps://apps.ce.bktencent.com/stag--default--bk-scut-course/backup-file?${queryString.stringify(params)}`;
+      const url = `https://apps.ce.bktencent.com/stag--default--bk-scut-course/backup-file?${queryString.stringify(params)}`;
       return http.get(url, {}, config);
     },
     // 查询备份记录
