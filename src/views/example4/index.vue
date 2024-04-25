@@ -20,12 +20,9 @@
 </template>
 
 <script>
-import { bkTable, bkTableColumn } from '@tencent/bk-magic-vue';
 
 export default {
   components: {
-    bkTable,
-    bkTableColumn,
   },
   data() {
     return {

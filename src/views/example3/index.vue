@@ -59,29 +59,8 @@
 
 <script>
 
-import {
-  bkContainer,
-  bkCol,
-  bkForm,
-  bkFormItem,
-  bkButton,
-  bkTable,
-  bkInput,
-  bkTableColumn,
-  bkSwitcher,
-} from '@tencent/bk-magic-vue';
-
 export default {
   components: {
-    bkContainer,
-    bkCol,
-    bkForm,
-    bkFormItem,
-    bkButton,
-    bkInput,
-    bkTable,
-    bkTableColumn,
-    bkSwitcher,
   },
   data() {
     return {
