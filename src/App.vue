@@ -90,16 +90,6 @@ export default {
             url: 'example1',
           },
           {
-            name: '文件查询与备份',
-            icon: 'icon-tree-application-shape',
-            url: 'example3',
-          },
-          {
-            name: '备份记录',
-            icon: 'icon-tree-application-shape',
-            url: 'example4',
-          },
-          {
             name: '登陆信息',
             icon: 'icon-tree-group-shape',
             url: 'example2',
@@ -144,7 +134,6 @@ export default {
     }
   },
   mounted() {
-    document.title = '蓝鲸应用';
     bus.$on('show-login-modal', (data) => {
       this.$refs.bkAuth.showLoginModal(data);
     });
