@@ -177,6 +177,8 @@ export default {
         await this.$store.dispatch('example/backupFile', queryData, {});
       } catch (err) {
         console.log(err);
+        this.isLoading = false;
+        return;
       }
       this.isLoading = false;
       const config = {
