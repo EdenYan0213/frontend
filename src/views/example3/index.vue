@@ -17,6 +17,11 @@
             <bk-input v-model="suffix" />
           </bk-form-item>
           <bk-form-item>
+            <span v-bk-tooltips.top-start="'目录以\' / \'开头，后缀不包含\' . \''" style="color: #3b83ff">
+              <i class="bk-icon icon-info-circle-shape"></i>
+            </span>
+          </bk-form-item>
+          <bk-form-item>
             <bk-button :theme="'primary'" type="submit" @click="searchFile" class="mr10">查询</bk-button>
           </bk-form-item>
         </bk-form>
@@ -45,7 +50,7 @@
           <bk-table-column label="主机ID" prop="bk_host_id" />
           <bk-table-column label="文件列表" prop="bk_file_list" />
           <bk-table-column label="文件数量" prop="bk_file_cnt" />
-          <bk-table-column label="文件总大小" prop="bk_file_total_size" />
+          <bk-table-column label="文件总大小(字节)" prop="bk_file_total_size" />
           <bk-table-column label="操作" prop="bk_file_option">
             <template slot-scope="{ row }">
               <span @click="backupFile(row.bk_host_id)" style="color: #0000edff; cursor: pointer;">立即备份</span>
@@ -132,6 +137,8 @@ export default {
         res = await this.$store.dispatch('example/searchFile', queryData, {});
       } catch (err) {
         console.log(err);
+        this.isLoading = false;
+        return;
       }
       this.isLoading = false;
       this.fileData = [];
