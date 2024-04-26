@@ -1,6 +1,11 @@
 <template>
   <div class="example1-wrapper" >
 
+    <iframe
+        src="http://apps.ce.bktencent.com/bk-vision/embed/?uid=3mu6wqHieVcLFhAygQ3R5i&bk_app_id=&bk_app_list=['bk-scut-course']&name=&show_copyright=True&watermark=True&time_readonly=False&show_time=True&show_refresh=True&start_time=now/d&end_time=now/d&preview=False&hide_toolbox=False&hide_filter=False&panels=&refresh=False"
+        style="height: 100%;width: 100%;border: 1px solid rgb(220, 222, 229);">
+    </iframe>
+
 
     <div class="fr clearfix mb15">
       <bk-form form-type="inline">
@@ -197,7 +202,7 @@ export default {
     async getBizData() {
       try {
         // 初始化业务列表数据，渲染至select下拉选框
-        const res = await this.$store.dispatch('example/getBizData', {}, { fromCache: true });
+        const res = await this.$store.dispatch('example/getBizData', {}, { fromCache: true });b
         this.biz_list=res.data.info
         // this.tableData = res.data.info;
         // this.pagination.count = res.data.count;
