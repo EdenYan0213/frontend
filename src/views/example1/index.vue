@@ -202,7 +202,7 @@ export default {
     async getBizData() {
       try {
         // 初始化业务列表数据，渲染至select下拉选框
-        const res = await this.$store.dispatch('example/getBizData', {}, { fromCache: true });b
+        const res = await this.$store.dispatch('example/getBizData', {}, { fromCache: true });
         this.biz_list=res.data.info
         // this.tableData = res.data.info;
         // this.pagination.count = res.data.count;
