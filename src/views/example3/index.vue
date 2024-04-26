@@ -127,7 +127,12 @@ export default {
       };
       this.loadingText = '正在查找文件……';
       this.isLoading = true;
-      const res = await this.$store.dispatch('example/searchFile', queryData, {});
+      let res;
+      try {
+        res = await this.$store.dispatch('example/searchFile', queryData, {});
+      } catch (err) {
+        console.log(err);
+      }
       this.isLoading = false;
       this.fileData = [];
       let errMsg = '';
@@ -168,7 +173,11 @@ export default {
       };
       this.loadingText = '正在备份文件……';
       this.isLoading = true;
-      await this.$store.dispatch('example/backupFile', queryData, {});
+      try {
+        await this.$store.dispatch('example/backupFile', queryData, {});
+      } catch (err) {
+        console.log(err);
+      }
       this.isLoading = false;
       const config = {
         theme: 'success',
