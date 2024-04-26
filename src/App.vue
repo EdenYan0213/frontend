@@ -1,12 +1,12 @@
 <template>
   <div id="app" :class="systemCls">
     <bk-navigation
-      :header-title="nav.id"
-      :side-title="nav.title"
-      :navigation-type="curNav.nav"
-      :need-menu="curNav.needMenu"
-      :default-open="true"
-      @toggle="handleToggle">
+        :header-title="nav.id"
+        :side-title="nav.title"
+        :navigation-type="curNav.nav"
+        :need-menu="curNav.needMenu"
+        :default-open="true"
+        @toggle="handleToggle">
       <template slot="header">
         <div class="navigation-header">
           <div class="header-title">
@@ -29,29 +29,29 @@
       </template>
       <template slot="menu">
         <bk-navigation-menu
-          ref="menu"
-          @select="handleSelect"
-          :default-active="nav.id"
-          :before-nav-change="beforeNavChange"
-          :toggle-active="nav.toggle">
+            ref="menu"
+            @select="handleSelect"
+            :default-active="nav.id"
+            :before-nav-change="beforeNavChange"
+            :toggle-active="nav.toggle">
           <bk-navigation-menu-item
-            v-for="item in nav.list"
-            :key="item.name"
-            :has-child="item.children && !!item.children.length"
-            :group="item.group"
-            :icon="item.icon"
-            :disabled="item.disabled"
-            :url="item.url"
-            :id="item.name">
+              v-for="item in nav.list"
+              :key="item.name"
+              :has-child="item.children && !!item.children.length"
+              :group="item.group"
+              :icon="item.icon"
+              :disabled="item.disabled"
+              :url="item.url"
+              :id="item.name">
             <span>{{item.name}}</span>
             <div slot="child">
               <bk-navigation-menu-item
-                :key="child.name"
-                v-for="child in item.children"
-                :id="child.name"
-                :disabled="child.disabled"
-                :icon="child.icon"
-                :default-active="child.active">
+                  :key="child.name"
+                  v-for="child in item.children"
+                  :id="child.name"
+                  :disabled="child.disabled"
+                  :icon="child.icon"
+                  :default-active="child.active">
                 <span>{{child.name}}</span>
               </bk-navigation-menu-item>
             </div>
@@ -73,8 +73,8 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
-import { bus } from '@/common/bus';
+import {mapGetters} from 'vuex';
+import {bus} from '@/common/bus';
 
 export default {
   name: 'App',
@@ -88,6 +88,16 @@ export default {
             name: '首页',
             icon: 'icon-tree-application-shape',
             url: 'example1',
+          },
+          {
+            name: '文件查询与备份',
+            icon: 'icon-tree-application-shape',
+            url: 'example3',
+          },
+          {
+            name: '备份记录',
+            icon: 'icon-tree-application-shape',
+            url: 'example4',
           },
           {
             name: '登陆信息',
@@ -134,6 +144,7 @@ export default {
     }
   },
   mounted() {
+    document.title = '蓝鲸应用';
     bus.$on('show-login-modal', (data) => {
       this.$refs.bkAuth.showLoginModal(data);
     });
@@ -171,100 +182,110 @@ export default {
 </script>
 
 <style lang="postcss">
-    @import './css/reset.css';
-    @import './css/app.css';
+@import './css/reset.css';
+@import './css/app.css';
 
-    .main-content {
-        min-height: 300px;
+.main-content {
+  min-height: 300px;
+}
+
+.bk-navigation {
+  outline: 1px solid #ebebeb;
+
+  .bk-navigation-wrapper {
+    height: calc(100vh - 252px) !important;
+  }
+}
+
+.navigation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  height: 100%;
+  font-size: 14px;
+
+  .header-nav {
+    display: flex;
+    padding: 0;
+    margin: 0;
+
+    &-item {
+      list-style: none;
+      margin-right: 40px;
+      color: #96A2B9;
+
+      &.item-active {
+        color: #FFFFFF !important;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: #D3D9E4;
+      }
+    }
+  }
+
+  .header-title {
+    color: #63656E;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin-left: -6px;
+  }
+
+  .header-user {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #96A2B9;
+
+    .bk-icon {
+      margin-left: 5px;
+      font-size: 12px;
     }
 
-    .bk-navigation {
-        outline: 1px solid #ebebeb;
-        .bk-navigation-wrapper {
-            height: calc(100vh - 252px)!important;
-        }
+    &.is-left {
+      @mixin is-left-mixin false;
     }
 
-    .navigation-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex: 1;
-        height: 100%;
-        font-size: 14px;
-        .header-nav {
-            display: flex;
-            padding: 0;
-            margin: 0;
-            &-item {
-                list-style: none;
-                margin-right: 40px;
-                color: #96A2B9;
-                &.item-active {
-                    color: #FFFFFF !important;
-                }
-                &:hover {
-                    cursor: pointer;
-                    color: #D3D9E4;
-                }
-            }
-        }
-        .header-title {
-            color: #63656E;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            margin-left: -6px;
-        }
-        .header-user {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #96A2B9;
-            .bk-icon {
-                margin-left: 5px;
-                font-size: 12px;
-            }
-            &.is-left {
-                @mixin is-left-mixin false;
-            }
-            &:hover {
-                cursor: pointer;
-                color: #D3D9E4;
-            }
-        }
+    &:hover {
+      cursor: pointer;
+      color: #D3D9E4;
     }
+  }
+}
 
-    .navigation-content {
-        min-height: calc(100% - 84px);
-        background: #FFFFFF;
-        box-shadow: 0px 2px 4px 0px rgba(25,25,41,0.05);
-        border-radius: 2px;
-        border: 1px solid rgba(220,222,229,1);
-    }
+.navigation-content {
+  min-height: calc(100% - 84px);
+  background: #FFFFFF;
+  box-shadow: 0px 2px 4px 0px rgba(25, 25, 41, 0.05);
+  border-radius: 2px;
+  border: 1px solid rgba(220, 222, 229, 1);
+}
 
-    .navigation-footer {
-        height: 52px;
-        width: 100%;
-        margin: 32px 0 0 ;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-top: 1px solid #DCDEE5;
-        color: #63656E;
-        font-size: 12px;
-    }
+.navigation-footer {
+  height: 52px;
+  width: 100%;
+  margin: 32px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #DCDEE5;
+  color: #63656E;
+  font-size: 12px;
+}
 
-    .navigation-admin {
-        @mixin popover-panel-mxin 170px #63656E;
-    }
+.navigation-admin {
+  @mixin popover-panel-mxin 170px #63656E;
+}
 
-    .tippy-popper {
-        .tippy-tooltip.navigation-profile-theme {
-            padding: 0;
-            border-radius: 0;
-            box-shadow: none;
-        }
-    }
+.tippy-popper {
+  .tippy-tooltip.navigation-profile-theme {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
 </style>
